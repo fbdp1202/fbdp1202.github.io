@@ -2,6 +2,14 @@
 layout: base
 ---
 
+<div style="text-align: center;">
+  <a href="http://hits.dwyl.com/{{ site.url | remove_first: 'https://' | remove_first: 'http://' }}{{ page.url }}"
+    target="_blank">
+    <img
+      src="http://hits.dwyl.com/{{ site.url | remove_first: 'https://' | remove_first: 'http://' }}{{ page.url }}.svg" />
+  </a>
+</div>
+
 {% include post.html post=page link_title=false %}
 
 {% include about.html %}
