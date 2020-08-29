@@ -102,6 +102,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-redirect-from
+  - jekyll-include-cache
 
 exclude:
   - README.md
@@ -137,4 +138,7 @@ tipue_search:
     files: [search.html, index.html, tags.html]
     categories: []
     tags: []
-    
+
+
+exclude:
+  - .jekyll-cache
