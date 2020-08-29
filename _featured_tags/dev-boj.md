@@ -4,5 +4,5 @@ title: BOJ
 slug: boj
 category: dev
 menu: false
-order: 5
+order: 1
 ---

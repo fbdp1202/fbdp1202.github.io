@@ -1,8 +1,8 @@
 ---
 layout: tag-blog
-title: ML
-slug: ml
+title: DSP
+slug: dsp
 category: dev
 menu: false
-order: 4
+order: 2
 ---
