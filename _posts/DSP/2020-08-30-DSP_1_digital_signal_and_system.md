@@ -1,6 +1,7 @@
 ---
 
-layout: post title: < DSP 정리 > 1. Digital Signal과 Digital System category: dev permalink: /DSP/:year/:month/:day/:title/ tags: dev dsp DSP정리시리즈
+layout: post
+title: < DSP 정리 > 1. Digital Signal과 Digital System category: dev permalink: /DSP/:year/:month/:day/:title/ tags: dev dsp DSP정리시리즈
 
 comments: true
 --------------
