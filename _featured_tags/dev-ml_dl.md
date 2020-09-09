@@ -1,8 +1,8 @@
 ---
 layout: tag-blog
-title: ML
-slug: ml
+title: ML & DL
+slug: mldl
 category: dev
 menu: false
-order: 4
+order: 3
 ---
