@@ -35,21 +35,12 @@ comments: true
 <br><br>
 
 ## 개요
-### < Loss Functions and Optimization >
-0. [Reminder Previous Lecture](#reminder-previous-lecture)
-1. [Loss Function](#loss-function)
-    1. [Multiclass SVM loss](#multiclass-svm-loss)
-    2. [Regularization](#regularization)
-    3. [Softmax Classifier](#softmax-classifier)
-2. [Optimization](#optimization)
-    1. [Random search 임의 탐색](#random-search-임의-탐색)
-    2. [local geometry 경사 하강법](#local-geometry-경사-하강법)
-    3. [Stochastic Gradient Descent](#stochastic-gradient-descent)
-3. [특징변환](#특징변환)
-    1. [컬러 히스토그램](#컬러-히스토그램)
-    2. [Histogram of Oriented Gradient](#histogram-of-oriented-gradient)
-    3. [Bag of Words](#bag-of-words)
-4. [결론](#결론)
+### < Backpropagation and Neural Networks >
+1. [Computational graphs](#computational-graphs)
+2. [Backpropagation](#backpropagation)
+3. [Gradient for vectorized code](#gradient-for-vectorized-code)
+4. [Neural Networks](#neural-networks)
+
 
 ---
 
@@ -82,30 +73,31 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 
 이러한 국소적 상황에서는 다음과 같이 보다 쉽게 `Gradient`값을 각각 구할 수 있습니다.
 
-![](1600155842240.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-002-Backpropagation_example_1.png)
 <br><br>
 
 이제 뒤에서 부터 차례대로 Gradient 값을 구해봅시다.
 
 마지막값은 Gradient 값은 1입니다.
 
-![](1600155880656.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-003-Backpropagation_example_2.png)
+<br><br>
 
 다음으로 z값에 대한 Gradient 값은 `q`값인 것을 볼 수 있습니다.
 
 따라서 답은 `q=3`의 값을 가지는 것을 볼 수 있습니다.
 
-![](1600155899281.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-004-Backpropagation_example_3.png)
+<br><br>
 
 다음 q값에 대한 Gradient 값은 `z`값인 것을 볼 수 있습니다.
 
 따라서 답은 `z=-4` 값을 가지는 것을 볼 수 있습니다.
 
-![](1600155914561.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-005-Backpropagation_example_4.png)
+<br><br>
 
-이제 x와 y에 대한 값을 계산하기 위해서 앞에서 계산한 Gradient 값과 현재 local Gradient 간에
-
-`Chain Rule`를 적용하여 계산해봅시다.
+이제 x와 y에 대한 값을 계산하기 위해서 앞에서 계산한 Gradient 값과 현재 local Gradient 간에 `Chain Rule`를 적용하여 계산해봅시다.
 
 결과적으로 q값에 대한 f의 Gradient와 y값에 대한 q의 Gradient를 곱하면
 
@@ -113,7 +105,8 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 
 그림에는 없지만 x값 또한 `-4 * 1 = -4`를 가진다는 것을 Backpropagation (역전파법)을 이용하여 유추할 수 있습니다.
 
-![](1600155926897.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-006-Backpropagation_example_5.png)
+<br><br>
 
 자 위 설명을 좀더 보기 쉽게 그림으로 설명해 보겠습니다.
 
@@ -133,7 +126,8 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 
 `forward pass`가 끝난 이후 역으로 미분해가며 기울기 값을 구해가는 과정은 `backward pass`라고 부릅니다.
 
-![](1600155949856.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-007-Backpropagation_fig.png)
+<br><br>
 
 자 이제 좀 복잡한 예시를 봅시다.
 
@@ -143,7 +137,8 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 
 뒤에서부터 backpropagation를 한 결과 값입니다.
 
-![](1600156057632.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-008-Backpropagation_another_example_1.png)
+<br><br>
 
 여기서 중요하게 보아야 할 부분은 아래의 파란색 박스 부분입니다.
 
@@ -157,7 +152,8 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 
 `loss = (1-0.73) * 0.73 = 0.2` 의 값을 가지는 것을 볼 수 있습니다.
 
-![](1600156067263.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-009-Backpropagation_another_example_2.png)
+<br><br>
 
 그리고 Backpropagation을 하면서 자주 보일 패턴입니다.
 `add gate`는 덧셈 `+`,
@@ -170,7 +166,8 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 - `max gate` : `더 큰 쪽에만 gradient를 전달`하고 `작은 쪽은 0값`을 줍니다.
 - `mul gate` : 현재의 gradient를 `각각 숫자에 곱해서 바꿔치기` 해주면 됩니다.
 
-![](1600156081696.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-010-Backpropagation_Patterns.png)
+<br><br>
 
 아래와 같이 노드 하나에서 다른 노드 두개로 이어졌을 때, backpropagation을 수행할 때
 
@@ -178,7 +175,8 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 
 반대로 앞의 노드 하나만 바뀌어도 뒤의 노드 두 개가 모두 바뀐다는 사실을 알아두시면 좋습니다.
 
-![](1600156092991.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-011-Backpropagation_add_at_branches.png)
+<br><br>
 
 ## Gradient for vectorized code
 
@@ -190,7 +188,8 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 
 이를 Jacobian (야코비안) matrix 라고 한다.
 
-![](1600156111631.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-012-Gradients_for_vectorized_code.png)
+<br><br>
 
 자 예시로 4096-d 의 input matrix와 같은 경우, Jacobian matrix를 `4096 x 4096`의 크기를 가집니다.
 
@@ -200,7 +199,8 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 
 여기서는 `Jacobian matrix` 가 `input matrix의 길이를 변으로 가지는 정방형 행렬`임을 알고 넘어가면 됩니다.
 
-![](1600156437184.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-013-vectorized_operationis.png)
+<br><br>
 
 아래에는 벡터 입력에 대한 Gradient 값을 구하는 과정을 보여줍니다.
 
@@ -208,17 +208,20 @@ Computational Graphs로 표현하면 `input` 값과 `local gradient`값을 쉽�
 
 이때에 L2에 입력 `q=Wx`라고 할때, `L2의 Gradient 값은 2q`임을 알수 있다.
 
-![](1600156445937.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-014-vectorized_operationis_examples_1.png)
+<br><br>
 
 이후에 W에 대한 Jacobian matrix 값과 앞에서 L2에 대해 계산한 결과를 Chain rule를 이용하여 계산합시다.
 
-![](1600156470304.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-015-vectorized_operationis_examples_2.png)
+<br><br>
 
 마지막으로 입력 X에 대한 Jacobian matrix에 대해서 앞에 과정을 반복하여 계산합시다.
 
 이러한 과정으로 vector에 대한 Backpropagation 진행과정을 볼 수 있었습니다.
 
-![](1600156496721.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-016-vectorized_operationis_examples_3.png)
+<br><br>
 
 이제 위에서 배운 Backpropagation를 코드로 구현해봅시다.
 
@@ -228,7 +231,8 @@ Backward pass에서는 gradient를 계산합니다.
 
 여기서 `Forward의 값(연산 결과)은 이후에 Backward pass에서 사용하기에 저장해야합니다.`
 
-![](1600156552208.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-017-Modularized_implementation_forward_backward.png)
+<br><br>
 
 ## Neural Networks
 
@@ -246,17 +250,20 @@ Neural Networks를 이용하면 빨간색, 노란색 자동차와 같이 여러 
 
 이러한 방법으로 레이어를 쌓아가면서 `여러 특징을 추출 할 수 있다`는 것을 확인하였습니다.
 
-![](1600156577968.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-018-Neural_networks.png)
+<br><br>
 
 아래와 같이 Neural Network을 2개뿐 아니라 3개 이상으로 구성할 수 있다.
 
-![](1600156608287.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-019-Neural_networks_example_1.png)
+<br><br>
 
 아래 그림과 같이 Neural network는 `뉴런의 구조`와 `Computation Graph의 구조의 유사성`을 따온 구조이다.
 
 하지만 실제의 뉴런 구조와 같다고 생각하면 오산이다.
 
-![](1600156642304.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-020-Neural_networks_figure.png)
+<br><br>
 
 위 그림과 같이 중간중간에 모든 노드가 다음의 모든 노드에 영향을 끼치는 레이어를 `fully-connected layer`라고 합니다.
 
@@ -266,7 +273,8 @@ Neural Networks를 이용하면 빨간색, 노란색 자동차와 같이 여러 
 
 각각 1-hidden-layer 인공신경망, 2-hidden-layer 인공신경망이라고 불린다고합니다.
 
-![](1600157663742.png)
+![](/assets/img/dev/mldl/cs231n/lecture04/cs231n-04-021-Neural_networks_Architectures.png)
+<br><br>
 
 
 자 다음 강의에서는 CNN에 대해서 알아보도록하겠습니다.
