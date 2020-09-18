@@ -41,6 +41,8 @@ comments: true
 
 - [https://taeu.github.io/cs231n/deeplearning-cs231n-Neural-Networks-3/](https://taeu.github.io/cs231n/deeplearning-cs231n-Neural-Networks-3/)
 
+- [https://datascienceschool.net/view-notebook/f43be7d6515b48c0beb909826993c856/](https://datascienceschool.net/view-notebook/f43be7d6515b48c0beb909826993c856/)
+
 ---
 <br><br>
 
@@ -161,6 +163,8 @@ sigmoid의 `Zero centered` 문제를 해결한 `하이퍼볼릭 탄젠트(tanh)`
 
 아주 간단하게 구현할 수 있습니다.
 
+위에 사용한 sigmoid와 tanh보다 수렴속도가 6배나 빠르다고 한다.
+
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-010-ReLU_01.png)
 <br><br>
 
@@ -176,6 +180,14 @@ sigmoid의 `Zero centered` 문제를 해결한 `하이퍼볼릭 탄젠트(tanh)`
 <br><br>
 
 아래 그림과 같이 모든 DATA 에 대해서 0의 값을 가지게 되는 경우가 생기는 겁니다.
+
+이러한 경우가 발생하는 것은 아래와 같다.
+
+1. 초기화를 잘못한 경우
+    + 가중치 평면이 traning data로 부터 멀리 떨어져 있는 경우
+
+2. 지나치게 learning rate를 사용한 경우
+    + Update를 지나치게 크게 해서 ReLU가 데이터의 manifold를 벗어나게 된다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-012-ReLU_03.png)
 <br><br>
@@ -204,7 +216,12 @@ Exponential Linear Units (ELU)로 ReLU의 변형으로 나온 것입니다.
 
 이것도 `ReLU의 모든 장점`을 가지고 있고 `zero mean과 가까운 결과`가 나오게 됩니다.
 
+그리고 zero mean 형태가 saturation 되는 데, 이런 saturation이 잡음(noise)에 robust 하다고 합니다. (feature selection과 연관)
+
 exp 계산을 해야하는 것이 단점이라고 합니다.
+
+- 왜 ReLU, ELU는 왜 noise에 robust할까?
+    - 음의 영역에서 saturate되어 gradient vanishing 되는 부분이 있다. 이때 데이터 전체를 학습하는 것이 아니라 0인 부분이 있어 선택적으로 학습하게 된다.(generalized)
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-015-ELU.png)
 <br><br>
@@ -229,12 +246,30 @@ max 값을 이용해서 2개의 파라미터를 준 뒤에 좋은 것을 선택�
 
 이미지에서는 이미 값이 0 ~ 255로 제한되어 있어서 normalilzation은 사용하지 않고 zero-centered만 사용한다고 합니다.
 
+- 이미지에서 normalization을 사용하지 않는 이유
+    + 이미지에서 scale이 달라지면 다른 feature이게 때문입니다.
+
 일반적으로 평균 값인 128로 빼준다고 생각하시면 됩니다.
+
+- Scale 조정 (Normalization)
+> 이 부분은 CS231n의 강의노트보다 이해하기 더 쉽고 자세한 설명이 있는 링크를 가져왔습니다.
+
+Scale 조정은 (1) Standard Scaler, (2) Robust Scaler, (3) Minmax Scaler, (4) Normalizer 4가지 방법이 있는데 [Scikit-Learn의 전처리 기능](https://datascienceschool.net/view-notebook/f43be7d6515b48c0beb909826993c856/)을 통해 각 Scaler가 어떻게 구성되어 있는지 참고하시길 바랍니다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-017-Preprocess_01.png)
 <br><br>
 
 PCA와 Whitening 기법도 있다고하는데 image에서는 잘 쓰이지 않는다고 합니다.
+
+- Principal Component Analysis(PCA)
+    + 데이터를 정규화 시키고 공분산(Covariance) 행렬을 만듭니다.
+    + 공분산 행렬이란 각 구조간 상관관계를 말해주는 행렬입니다.
+    + SVD factorization으로 상위 중요한 몇 개의 vector들만 이용하여 차원을 축소하는데 사용할 수 있습니다.
+
+- Whitening
+    + input의 feature들을 uncorrelated하게 만들고, 각각의 variance를 1로 만들어줌
+    + 기저벡터 (eigenbasis) 데이터를 아이젠벨류(eigenvalue)값으로 나누어 정규화 하는 기법입니다.
+    + 이 변환의 기하학적 해석은 만약 입력 데이터의 분포가 multivariable gaussian 분포 라면 이 데이터의 평균은 0, 공분산은 단위행렬(I)인 정규분포를 가집니다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-018-Preprocess_02.png)
 <br><br>
@@ -327,6 +362,19 @@ network 각 층마다 input의 distribution이 달라지는 것을 방지합니�
 그 이유는 Dropout은 랜덤하게 값을 꺼내주기 때문입니다.
 
 BN도 마찬가지로 배치마다 값이 조금씩 다르게 들어가고 값이 계속 바뀌게 되어 노이즈가 적어지게 된다고 합니다.
+
+또한 BN은 선형변환으로 기존의 `공간적인 구조`가 잘 유지됩니다.
+
+Notice) CONV에서 Batch Normalization 할때 주의사항
+- 기존에 Wx + b 형태로 weight를 적용해 주는데 BN의 Beta 값과 중복된다.
+- 고로 Wx + b 의 bias 값을 사용하지 않아도 된다.
+
+- 장점
+    + 네트워크에 Gradient flow를 향상시킴
+    + 높은 learning rate를 사용해도 안정적인 학습, weight 초기화의 의존성을 줄임
+    + Regularization기능도 하여 dropout의 필요성을 감소시킴
+
+- Test할땐 Minibatch의 평균과 표준편차를 구할 수 없으니 Training에서 구한 고정된 Mean과 Std를 사용
 
 ## Hyperparameter Optimization
 
