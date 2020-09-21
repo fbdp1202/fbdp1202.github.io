@@ -45,6 +45,8 @@ comments: true
 
 - [http://blog.naver.com/PostView.nhn?blogId=sogangori&logNo=221035995877&parentCategoryNo=&categoryNo=6&viewDate=&isShowPopularPosts=false&from=postView](http://blog.naver.com/PostView.nhn?blogId=sogangori&logNo=221035995877&parentCategoryNo=&categoryNo=6&viewDate=&isShowPopularPosts=false&from=postView)
 
+- [https://mlexplained.com/2018/11/30/an-overview-of-normalization-methods-in-deep-learning/](https://mlexplained.com/2018/11/30/an-overview-of-normalization-methods-in-deep-learning/)
+
 ---
 <br><br>
 
@@ -378,14 +380,23 @@ network 각 층마다 input의 distribution이 달라지는 것을 방지합니�
 
 이게 적합한 것인지 아닌지는 알 수 없습니다.
 
+- 의문점
+    + Activation function을 relu를 사용한다면?
+    + 가중치의 크기를 증가시킬때 더 나은 성능을 가진다면?
+
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-026-BN_03.png)
 <br><br>
 
-이러한 문제를 해결하기 위해서 여기서 감마와 B 값이 주어지게 됩니다.
+이러한 문제를 해결하기 위해서 여기서 감마와 베타 값이 주어지게 됩니다.
 
-감마 값으로 BN의 Variance 값을 조절하며, B 값으로 평균 값을 조절할 수 있게됩니다.
+감마 값으로 BN의 Variance 값을 조절하며, 베타 값으로 평균 값을 조절할 수 있게됩니다.
 
-그리고 이 감마와 B 값을 학습의 Hyperparameter로 사용하여 알맞은 값을 얻어가도록 합니다.
+그리고 이 감마와 베타 값을 학습의 Hyperparameter로 사용하여 알맞은 값을 얻어가도록 합니다.
+
+참고로 `감마 값이 표준편차`이고, `베타가 평균 값`이면 `BN를 하지 않는 것`과 같습니다.
+
+- `감마` : `Scaling`
+- `베타` : `Shifting`
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-027-BN_04.png)
 <br><br>
@@ -438,6 +449,8 @@ BN과 LN의 식은 아래와 같다.
 위 식에 대한 좀더 직관적인 이해는 아래와 같다.
 
 아래는 Batch Normalization과 Layer Normalization의 차이를 보여준다.
+
+실험적으로 RNN에서 좋은 성능을 가진다고 한다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-027-LN_02.png)
 <br><br>

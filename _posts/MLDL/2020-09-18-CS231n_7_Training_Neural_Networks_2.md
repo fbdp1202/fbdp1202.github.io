@@ -23,26 +23,28 @@ comments: true
 
 - [CS231 Lecture 7. 한국어 자막](https://github.com/visionNoob/CS231N_17_KOR_SUB/blob/master/kor/Lecture%207%20%20%20Training%20Neural%20Networks%20II.ko.srt)
 
+- [https://lsjsj92.tistory.com/405](https://lsjsj92.tistory.com/405)
+
+- [https://wonwooddo.tistory.com/?page=7](https://wonwooddo.tistory.com/?page=7)
+
+- [https://strutive07.github.io/2019/03/17/cs231n-lecture-7-1,-Traning-Neural-Networks-2.html](https://strutive07.github.io/2019/03/17/cs231n-lecture-7-1,-Traning-Neural-Networks-2.html)
+
+- [https://strutive07.github.io/2019/03/17/cs231n-lecture-7-2,-Traning-Neural-Networks-2.html](https://strutive07.github.io/2019/03/17/cs231n-lecture-7-2,-Traning-Neural-Networks-2.html)
+
+- [https://strutive07.github.io/2019/03/17/cs231n-lecture-7-3,-Traning-Neural-Networks-2.html](https://strutive07.github.io/2019/03/17/cs231n-lecture-7-3,-Traning-Neural-Networks-2.html)
+
+- [https://strutive07.github.io/2019/03/17/cs231n-lecture-7-4,-Traning-Neural-Networks-2.html](https://strutive07.github.io/2019/03/17/cs231n-lecture-7-4,-Traning-Neural-Networks-2.html)
+
+- [https://strutive07.github.io/2019/03/17/cs231n-lecture-7-5,-Traning-Neural-Networks-2.html](https://strutive07.github.io/2019/03/17/cs231n-lecture-7-5,-Traning-Neural-Networks-2.html)
+
+- [https://leechamin.tistory.com/98](https://leechamin.tistory.com/98)
+
+- [https://zzsza.github.io/data/2018/05/20/cs231n-training_neural_networks_2/](https://zzsza.github.io/data/2018/05/20/cs231n-training_neural_networks_2/)
 
 ---
 <br><br>
 
 ## 개요
-### < Training Neural Networks 1 >
-1. [Activation Functions](#activation-functions)
-    1. [Sigmoid 함수](#sigmoid-함수)
-    2. [tanh 함수](#tanh-함수)
-    3. [ReLU 함수](#relu-함수)
-    4. [Leaky ReLU](#leaky-relu)
-    5. [PReLU](#prelu)
-    6. [ELU](#elu)
-    7. [Maxout](#maxout)
-    8. [Activation 결론](#activation-결론)
-2. [Data Preprocessing](#data-preprocessing)
-3. [Weight Initialization](#weight-initialization)
-    1. [작은 랜덤값 초기화](#작은-랜덤값-초기화)
-    2. [Xavier initialization](#xavier-initialization)
-4. [Batch Normalization](#batch-normalization)
-5. [Hyperparameter Optimization](#hyperparameter-optimization)
+### < Training Neural Networks 2 >
 
 ---
