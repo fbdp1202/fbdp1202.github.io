@@ -43,6 +43,8 @@ comments: true
 
 - [https://datascienceschool.net/view-notebook/f43be7d6515b48c0beb909826993c856/](https://datascienceschool.net/view-notebook/f43be7d6515b48c0beb909826993c856/)
 
+- [http://blog.naver.com/PostView.nhn?blogId=sogangori&logNo=221035995877&parentCategoryNo=&categoryNo=6&viewDate=&isShowPopularPosts=false&from=postView](http://blog.naver.com/PostView.nhn?blogId=sogangori&logNo=221035995877&parentCategoryNo=&categoryNo=6&viewDate=&isShowPopularPosts=false&from=postView)
+
 ---
 <br><br>
 
@@ -62,7 +64,10 @@ comments: true
     1. [작은 랜덤값 초기화](#작은-랜덤값-초기화)
     2. [Xavier initialization](#xavier-initialization)
 4. [Batch Normalization](#batch-normalization)
-5. [Hyperparameter Optimization](#hyperparameter-optimization)
+5. [Layer Normalization](#layer-normalization)
+6. [Instance Normalization](#instance-normalization)
+7. [Group Normalization](#group-normalization)
+6. [Hyperparameter Optimization](#hyperparameter-optimization)
 
 ---
 
@@ -83,6 +88,8 @@ Activation Function(활성화 함수)는 앞에서 배운 CNN(Convolutional Neur
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-002-Activation_Functions_Examples.png)
 <br><br>
+
+---
 
 ### Sigmoid 함수
 
@@ -146,6 +153,8 @@ Sigmoid 함수는 아래와 같은 모습을 하고 있습니다.
 
 그래서 sigmoid는 잘 쓰지 않습니다.
 
+---
+
 ### tanh 함수
 
 sigmoid의 `Zero centered` 문제를 해결한 `하이퍼볼릭 탄젠트(tanh)`입니다.
@@ -154,6 +163,8 @@ sigmoid의 `Zero centered` 문제를 해결한 `하이퍼볼릭 탄젠트(tanh)`
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-009-tanh.png)
 <br><br>
+
+---
 
 ### ReLU 함수
 
@@ -192,6 +203,8 @@ sigmoid의 `Zero centered` 문제를 해결한 `하이퍼볼릭 탄젠트(tanh)`
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-012-ReLU_03.png)
 <br><br>
 
+---
+
 ### Leaky ReLU
 
 이러한 문제를 해결하기 위해서 조금이라도 움직임을 주자는 것인데요.
@@ -201,6 +214,8 @@ sigmoid의 `Zero centered` 문제를 해결한 `하이퍼볼릭 탄젠트(tanh)`
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-013-Leaky_ReLU.png)
 <br><br>
 
+---
+
 ### PReLU
 
 또한 위 Leaky ReLU를 살짝 변경한 것이 Parametric Rectifier (PReLU) 입니다.
@@ -209,6 +224,8 @@ sigmoid의 `Zero centered` 문제를 해결한 `하이퍼볼릭 탄젠트(tanh)`
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-014-PReLU.png)
 <br><br>
+
+---
 
 ### ELU
 
@@ -226,6 +243,8 @@ exp 계산을 해야하는 것이 단점이라고 합니다.
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-015-ELU.png)
 <br><br>
 
+---
+
 ### Maxout
 
 max 값을 이용해서 2개의 파라미터를 준 뒤에 좋은 것을 선택하는 network 이다
@@ -235,10 +254,14 @@ max 값을 이용해서 2개의 파라미터를 준 뒤에 좋은 것을 선택�
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-016-MaxOut.png)
 <br><br>
 
+---
+
 ### Activation 결론
 - 일반적으로 딥러닝에서 ReLU와 Leaky ReLU를 많이 사용한다고 합니다.
 - Tanh는 RNN과 LSTM에서 자주 사용합니다.
 - sigmoid는 절대 사용하지 않는다고 합니다.
+
+---
 
 ## Data Preprocessing
 
@@ -274,6 +297,8 @@ PCA와 Whitening 기법도 있다고하는데 image에서는 잘 쓰이지 않�
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-018-Preprocess_02.png)
 <br><br>
 
+---
+
 ## Weight Initialization
 
 만약 Weight 값이 0인 경우에는 어떻게 될까요?
@@ -282,6 +307,8 @@ PCA와 Whitening 기법도 있다고하는데 image에서는 잘 쓰이지 않�
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-019-Weight_Initialization.png)
 <br><br>
+
+---
 
 ### 작은 랜덤값 초기화
 
@@ -310,6 +337,8 @@ tanh 그림을 보면 기울기가 0인 지점이 날라가게 됩니다.
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-022-Weight_Initialization_Example_03.png)
 <br><br>
 
+---
+
 ### Xavier initialization
 
 Xavier initialization은 위에서 고정된 크기로 scaling을 해주었다면,
@@ -321,11 +350,15 @@ Xavier initialization은 위에서 고정된 크기로 scaling을 해주었다�
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-023-Weight_Initialization_Example_04.png)
 <br><br>
 
+---
+
 ## Batch Normalization
 
-Batch normalization (BN)은 기본적으로 Gradient Vanishing이 나오지 않도록 하는 아이디어 입니다.
+우리는 데이터가 gaussian range에서 activation이 꾸준히 잘 되기를 원하고 있습니다.
 
-training 하는 과정 자체를 전체적으로 안정화시켜 주는 것입니다.
+이러한 착안점에서 제안된 것이 Batch Normalization입니다.
+
+이를 통해 training 하는 과정 자체를 전체적으로 안정화시켜 주는 것입니다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-024-BN_01.png)
 <br><br>
@@ -357,6 +390,9 @@ network 각 층마다 input의 distribution이 달라지는 것을 방지합니�
 ![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-027-BN_04.png)
 <br><br>
 
+![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-027-BN_05.png)
+<br><br>
+
 보통 BN을 하면 Dropout을 안써도 된다고 합니다.
 
 그 이유는 Dropout은 랜덤하게 값을 꺼내주기 때문입니다.
@@ -370,11 +406,78 @@ Notice) CONV에서 Batch Normalization 할때 주의사항
 - 고로 Wx + b 의 bias 값을 사용하지 않아도 된다.
 
 - 장점
-    + 네트워크에 Gradient flow를 향상시킴
-    + 높은 learning rate를 사용해도 안정적인 학습, weight 초기화의 의존성을 줄임
-    + Regularization기능도 하여 dropout의 필요성을 감소시킴
+    + Network에 `Gradient flow를 향상`시킴
+    + `높은 learning rate를 사용해도 안정적인 학습` 가능
+    + `Weight 초기화의 의존성을 줄임`
+    + `Regularization기능`도 하여 `dropout의 필요성을 감소`시킴
+    + `Test 시에 overhead가 없다`. (학습된 것을 사용만 함)
 
-- Test할땐 Minibatch의 평균과 표준편차를 구할 수 없으니 Training에서 구한 고정된 Mean과 Std를 사용
+- Test할땐 Minibatch의 평균과 표준편차를 구할 수 없으니 `Training에서 구한 고정된 Mean과 Std를 사용`함
+
+<br><br>
+
+---
+
+## Layer Normalization
+
+Layer Normalization(LN)은 Batch Normalization(BN) 비슷하지만 다르다.
+
+BN은 `Batch들과 W, H 대해서 Normalization`을 진행했다면,
+
+LN은 `한 Batch에서 Depth와 W,H 대해서 Normalization`을 한 것이다.
+
+고로 LN은 각 Batch들에 대해서는 신경쓰지 않고 BN과 다르게 각 Depth에 대한 정보를 모두 보고 Normalization을 진행한다.
+
+BN과 LN의 식은 아래와 같다.
+
+식을 보면 형태는 같고 i와 j만 바뀐 것을 볼 수 있다.
+
+![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-027-LN_01.png)
+<br><br>
+
+위 식에 대한 좀더 직관적인 이해는 아래와 같다.
+
+아래는 Batch Normalization과 Layer Normalization의 차이를 보여준다.
+
+![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-027-LN_02.png)
+<br><br>
+
+---
+
+## Instance Normalization
+
+Instance Normalization 은 Layer Normalization 에서 한 걸음 더 나아간 것입니다.
+
+Layer Normalization은 (Width, Height, Channel)에 대한 모든 성분을 보고 Normalization을 진행 진행했다면,
+
+Instance Normalization은 각 Channel에서 (Width, Height)에 대해 Normalization을 진행하는 것입니다.
+
+> 이는 이미지에 대해서만 가능한 정규화이고, RNN 에서는 사용할 수 없습니다. style transfer 에 있어서 배치 정규화를 대체해서 좋은 성능을 내는 것으로 보이며 GAN 에서도 사용되었다고 합니다.
+
+---
+
+## Group Normalization
+
+**그룹 정규화(group normalization)** 은 `채널 그룹에 대한 평균 및 표준 편차를 계산`합니다.
+
+이는 layer normalization 과 instance normalization 의 조합인데,
+
+`모든 채널이 단일 그룹(G=C)이 된다면 layer normalization` 이 되고,
+
+`각 채널을 다른 그룹에 넣게 될 경우(G=1) instance normalization` 이 됩니다.
+
+그룹 정규화는 `ImageNet` 에서 batch size 32 인 batch normalization 의 성능에 근접하며, `더 작은 크기에서는 성능이 더 좋게 나타난다.`
+
+또한, 높은 해상도의 이미지를 사용하여 물체를 감지(detection)하거나 분할(segmentation)하는 문제는 `메모리 문제로 배치 크기를 늘리기 어려운데 이러한 문제에 대해 그룹 정규화는 매우 효과적인 정규화 방법`이다.
+
+- 그룹 정규화의 장점
+    + layer normalization보다 `각 채널의 독립성을 보장`해주며 `모델의 유연성(flexibility)`을 줄 수 있습니다.
+
+> 아래 그림은 이미지의 resolution은 H,W이 하나의 차원으로 표현되었으며, C는 Channel axis(채널의 개수), N은 batch axis(배치의 개수) 이다.
+
+![](/assets/img/dev/mldl/cs231n/lecture06/cs231n-06-027-Overall_Figure.png)
+
+---
 
 ## Hyperparameter Optimization
 
