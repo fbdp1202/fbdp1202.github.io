@@ -399,16 +399,6 @@ Adam이 없어서 아쉽지만... 다른 것이라도 잘 살펴봅시다.
 ![](/assets/img/dev/mldl/cs231n/lecture07/cs231n-07-905-Compare_Optimzations_05.gif)
 <br><br>
 
-![](/assets/img/dev/mldl/cs231n/lecture07/cs231n-07-906-Compare_Optimzations_06.gif)
-<br><br>
-
-![](/assets/img/dev/mldl/cs231n/lecture07/cs231n-07-907-Compare_Optimzations_07.gif)
-<br><br>
-
-![](/assets/img/dev/mldl/cs231n/lecture07/cs231n-07-908-Compare_Optimzations_08.gif)
-<br><br>
-
-
 ---
 
 ### Tuning learning rate
