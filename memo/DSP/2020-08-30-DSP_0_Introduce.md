@@ -1,11 +1,11 @@
----
+<!-- ---
 layout: post
 title: < DSP 정리 > 0. DSP 정리 시작!
 category: dev
 permalink: /DSP/:year/:month/:day/:title/
 tags: dev dsp DSP정리시리즈
 comments: true
----
+--- -->
 ## 소개
 여러분 안녕하세요~! 흔한 공대생 **fbdp1202**입니다.
 
