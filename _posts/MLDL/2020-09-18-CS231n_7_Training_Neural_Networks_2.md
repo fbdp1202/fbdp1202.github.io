@@ -77,6 +77,7 @@ comments: true
     6. [Stochastic depth](#stochastic-depth)
     7. [Regularization 결론](#regularization-결론)
 4. [Transfer Learning](#transfer-learning)
+
 ---
 
 ## Introduction
