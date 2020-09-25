@@ -60,7 +60,6 @@ comments: true
 
 ---
 
-
 ## Introduction
 
 이번 강의는 여태 나왔었던 훌륭한 CNN 모델들을 소개해줍니다.
