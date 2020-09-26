@@ -41,3 +41,13 @@ comments: true
 ## 개요
 ### < Recurrent Neural Networks >
 ---
+
+$$ a + b + c $$
+
+$$ a + b $$
+
+$$ a_i + x \times y \cfrac{a}{b} \sqrt{a} \log_10{a} \sum_{a}^{b}{abc} \infty $$ bcd
+
+
+$$ a_i + x \times y \cfrac{a}{b} \sqrt{a} \log_10{a} \sum_{a}^{b}{abc} \infty $$
+bcd
