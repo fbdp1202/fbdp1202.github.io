@@ -138,7 +138,7 @@ RNN은 모든 함수와 parameter 값을 모든 시간에서 동일하게 사용
 >     ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-004-RNN_Compare_tanh_sigmoid.png)
 > - CMU에서 음성인식하시는 Raj 교수의 슬라이드
 >     - sigmoid와 tanh의 포화 지점을 비교하면 tanh가 좋은 성능을 가지는것을 볼 수 있다.
->     - relu와 같은 경우 exploding 현상이 존재한다.
+>     - relu와 같은 경우 exploding 현상이 존재합니다.
 >     ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-005-RNN_Compare_non_linearities.png)
 
 
@@ -183,9 +183,9 @@ image captioning과 같이 하나의 사진에 대한 여러 단어을 출력하
 > - 기계번역에서 사용
 > - Mony to one 과 ono to many의 조합
 > - Encoder + Decoder
-> - 예를 들어, Encoder는 영어문장과 같은 가변입력을 받아들여 final hidden state에 전체 sentence를 요약한다.
+> - 예를 들어, Encoder는 영어문장과 같은 가변입력을 받아들여 final hidden state에 전체 sentence를 요약합니다.
 > - 여기서 Decoder는 이 sentence를 받아 다른 언어로 번역된 문장을 출력할 수 있다.
-> - END 와 같은 임의에 토큰을 지정하여 출력 길이를 조절할 수 있으며, 입력과 같은 경우 0을 집어넣는 경우가 많다고 한다.
+> - END 와 같은 임의에 토큰을 지정하여 출력 길이를 조절할 수 있으며, 입력과 같은 경우 0을 집어넣는 경우가 많다고 합니다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-011-RNN_Seq2Seq.png)
 
@@ -286,7 +286,7 @@ Image captioning은 CNN에서 나오는 하나의 출력 값을 RNN의 입력으
 
 ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-022-RNN_Example_Image_Captioning_05.png)
 
-위처럼, 위 이미지를 통째로 사용하여 얻어진 `요점`을 언어로 변경하는 `Top-Down Approach`라고 한다.
+위처럼, 위 이미지를 통째로 사용하여 얻어진 `요점`을 언어로 변경하는 `Top-Down Approach`라고 합니다.
 
 ### RNN 예제 Image Captioning with Attention
 
@@ -294,11 +294,11 @@ Image captioning은 CNN에서 나오는 하나의 출력 값을 RNN의 입력으
 
 이 방법은 caption을 생성할 때 이미지의 다양한 부분을 `집중`해서 볼 수 있습니다.
 
-위에서 사용한 `Top-Down Approach`는 `이미지의 디테일한 부분들에 집중하는 것이 상대적으로 어렵다`는 단점을 가진다.
+위에서 사용한 `Top-Down Approach`는 `이미지의 디테일한 부분들에 집중하는 것이 상대적으로 어렵다`는 단점을 가집니다.
 
-이 `Attention` 기법을 이용하면 이미지의 모든 부분으로 부터 단어를 뽑아내어 `디테일`에 신경을 써줄 수 있다.
+이 `Attention` 기법을 이용하면 이미지의 모든 부분으로 부터 단어를 뽑아내어 `디테일`에 신경을 써줄 수 있습니다.
 
-이 방법을 `Bottom-Up Approach`라고 한다.
+이 방법을 `Bottom-Up Approach`라고 합니다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-023-RNN_Example_Image_Captioning_Attention_01.png)
 
@@ -320,8 +320,8 @@ Image captioning은 CNN에서 나오는 하나의 출력 값을 RNN의 입력으
 
 > - 여기서 attetion 값은 (L = W x H)로 각 이미지의 어느 부분을 중심적으로 볼지에 대한 정보입니다.
 > - 아래는 Soft attention과 Hard attention의 차이를 보여줍니다.
-> - Soft attention: 0~1부터 다양한 범위 값을 부드럽게 사용한다.
-> - Hard attention: 0또는 1의 값을 사용하여 정확하게 몇 부분을 집중해서 본다.
+> - Soft attention: 0~1부터 다양한 범위 값을 부드럽게 사용합니다.
+> - Hard attention: 0또는 1의 값을 사용하여 정확하게 몇 부분을 집중해서 봅니다.
 > - 이러한 두 차이점으로 아래에서 두 분포의 차이를 볼 수 있습니다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-027-RNN_Example_Image_Captioning_Attention_05.png)
