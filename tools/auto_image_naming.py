@@ -20,7 +20,7 @@ img_path = "../assets/img/"
 img_category = "dev/mldl/"
 
 title = "cs231n"
-chapter_num = "09"
+chapter_num = "10"
 
 img_title = title + "/"
 img_chapter = "lecture" + chapter_num + "/"
