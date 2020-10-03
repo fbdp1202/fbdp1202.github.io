@@ -108,6 +108,80 @@ Semantic Segmentation 은 아래 그림과 같이 한 그림 안에서 각 영�
 이러한 문제점을 완화시키기 위해서 downsampling과 upsampling 방법이 제시되었습니다.
 
 이미지의 크기를 그대로 유지하여 CNN 작업을 하던 전 방법과 다르게, 이미지의 크기를 한번 Downsampling을 통해서 크기를 줄입니다.
-
+이후에 Upsampling 으로 원래의 이미지 크기로 복원하여 계산 효율성을 높였습니다.
 
 ![](1601357064114.png)
+
+대표적인 Donwsampling 방법은 Max Pooling과 ConV의 Stride를 2를 주는 방식입니다.
+
+먼저 Max Pooling이후에 Unpooling(Upsampling)을 하는 방법은 여러가지 방법이 있싑니다. 이에 대한 설명은 아래와 같습니다.
+
+### Nearest Neighbor and Bed of Nails
+
+첫번째 방법은 그냥 주변에 이웃값으로 채우는 것입니다. Max Pooling stride값이 2인 경우 아래와 같이 같은 값으로 채워줍니다.
+
+이와 달리 Bed of Nails는 그냥 가장자리 한쪽에만 채우고 나머지는 0으로 채웁니다.
+
+![](assets/markdown-img-paste-20201003142851692.png)
+
+### Max Unpooling
+
+다음으로는 기존에 Max Pooling 된 위치 정보를 기억하는 방법입니다.
+
+Unpooling 시에 기존에 최대 값이었던 곳으로 Unpooling 하고 나머지는 0으로 사용하는 방법입니다.
+
+![](assets/markdown-img-paste-20201003143133583.png)
+
+### Transpose Convolution
+
+이제 Max Pooling의 방법이 아니라 Conv의 stride값을 이용해 Downsampling한후 Upsampling하는 방법을 알아보도록 하겠습니다.
+
+Convolution과 같은 경우 아래 그림과 같이 빨간색과 파란색 Convolution 영역이 겹치는 부분이 생깁니다.
+
+이러한 점에서 Upsampling 시에 이를 반영하여 Upsampling 될 필요성이 있습니다.
+
+![](assets/markdown-img-paste-20201003143350292.png)
+
+이러한 방법에서 이를 2차원이 아니라 1차원으로 이러한 복원을 나타낸 그림은 아래와 같습니다.
+
+아래에는 입력에 대해서 Transpose Convolution 으로 Upsampling 하는 방법을 나타냅니다.
+
+아래는 가로 방향의 성분에 대해서만 생각한 그림입니다.
+
+여기서 Convolution의 pad가 1이라고 가정하고 생각합시다.
+
+이때에 az+bx로 3번째 요소가 겹치는 부분을 표현합니다.
+
+![](assets/markdown-img-paste-20201003143643576.png)
+
+아래는 1D에서 Convolution과 Transpose Convolution을 행렬곱 형태로 나타낸 식입니다.
+
+아래의 Convolution은 필터크기 3, stride 2, pad 1인 경우입니다.
+
+여기서 x,y,z 값은 Filter의 값이고, a,b,c,d는 입력값입니다.
+
+여기서 pad를 표현하기 위해서 a의 위와 d의 아래에 0의 값으로 채워 넣은 것을 볼 수 있습니다.
+
+여기서 이러한 방식으로 행렬곱으로 transpose convolution을 할 수 있다는 것만 알면 됩니다.
+
+![](assets/markdown-img-paste-20201003145456923.png)
+
+## Object Detection
+
+물체 인식(Object Detection)은 Classification + Location 두 가지를 모두 필요로 합니다.
+
+아래와 그림과 같이 한 마리의 개를 찾아내고(Classification) 이 개의 위치를 찾아(Location)를 찾아 Bounding Box를 찾습니다.
+
+![](assets/markdown-img-paste-20201003150033574.png)
+
+이와 같은 방법은 앞에서 배운 이미지 분류기의 마지막 단에 두가지 갈래로 나누어 작업을 진행합니다.
+
+한가지는 이미지에 대해서 어떤 물체가 있는지 알아내는 FC와 나머지 하나는 이 물체의 위치를 찾아내는 FC로 여러가지 일을 해야합니다.
+
+여기서 일반적으로 앞에서 아용하는 이미지 분류기는 pre-training 된 모델을 사용하고 나머지 2개의 task 에 대해서 학습을 진행합니다.
+
+보통 위에서 classification과 같은 경우 Softmax loss를, Location은 L2 loss로 다른 종류의 loss를 사용합니다.
+
+여기서 한개의 loss가 아니라 2개의 대한 loss가 발생하여 이를 학습하기에 어려움이 있다고 합니다.
+
+![](assets/markdown-img-paste-20201003150400995.png)
