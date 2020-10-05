@@ -23,7 +23,7 @@ comments: true
 
 - [CS231n 2020 Lecture 12. 강의 노트](http://cs231n.stanford.edu/slides/2020/lecture_12.pdf)
 
-- [CS231 Lecture 12. 한국어 자막](https://github.com/visionNoob/CS231N_17_KOR_SUB/blob/master/kor/Lecture%2011%20%20%20Detection%20and%20Segmentation.ko.srt)
+- [CS231 2017 Lecture 11. 한국어 자막](https://github.com/visionNoob/CS231N_17_KOR_SUB/blob/master/kor/Lecture%2011%20%20%20Detection%20and%20Segmentation.ko.srt)
 
 - [https://leechamin.tistory.com/112](https://leechamin.tistory.com/112)
 
