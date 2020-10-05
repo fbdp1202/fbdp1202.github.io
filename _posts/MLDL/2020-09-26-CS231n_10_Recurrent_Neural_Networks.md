@@ -88,33 +88,23 @@ RNN이란 Sequence를 따라 node 사이의 연결의 형태가 방향 그래프
 
 아래의 있는 입력과 출력에 따른 구조를 살펴봅시다.
 
-> 1) one to one
-
+> - one to one
 >     - 가장 기본적인 형태로 하나의 입력과 하나의 출력을 가지는 형태이다.
-
-> 2) one to many
-
+> - one to many
 >     - 하나의 입력에 대해서 여러 출력을 가집니다.
-
 >     - 예시 : image captioning - 하나의 사진에 대해 여러 단어를 출력함    
-
-> 3) many to one
-
+> - many to one
 >     - 여러 입력에 대해서 하나의 출력을 가집니다.
-
 >     - 예시 : 감정구별
-
-> 4) many to many
-
+> - many to many
 >     - 여러 입력에 대해서 여러 출력을 가집니다.
-
 >     - 입력에 대해 바로 출력이 나오는 경우가 있고 좀 이후에 나오는 것이 있습니다.
-
 >     - 입력에 대해 바로 나오는 경우 예시 : 비디오에 대해 프레임 단위로 classification
-
 >     - 입력에 대해 시간차이가 존재하는 경우 예시 : 기계번역
 
 ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-001-RNN_Process_Sequences.png)
+
+---
 
 ### RNN의 기본 구조와 수식
 
@@ -137,6 +127,8 @@ RNN은 모든 함수와 parameter 값을 모든 시간에서 동일하게 사용
 
 ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-003-RNN_Vanilla_Equation_02.png)
 
+---
+
 ### RNN의 활성화 함수 비교
 
 [이 사이트](https://www.facebook.com/groups/TensorFlowKR/permalink/478174102523653/) 에서 고수분들에 의견을 대략 정리해봤습니다.
@@ -153,6 +145,7 @@ RNN은 모든 함수와 parameter 값을 모든 시간에서 동일하게 사용
 >     - relu와 같은 경우 exploding 현상이 존재합니다.
 >     ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-005-RNN_Compare_non_linearities.png)
 
+---
 
 ### RNN Computational Graph
 
@@ -319,14 +312,14 @@ Image captioning은 CNN에서 나오는 하나의 출력 값을 RNN의 입력으
 ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-024-RNN_Example_Image_Captioning_Attention_02.png)
 
 - 진행 순서
-> 1. grid of vector 값을 입력으로 넣어서 a1 값을 생성합니다.
-> 2. 이 a1(attention) (L x 1)의 요소로 grid of vector (L x D)에 각 depth(1 x D)에 곱하여 scaling 합니다.
-> 3. L개의 scaling 된 벡터를 더하여 z<sub>1</sub>(1 x D) 를 만들고 이를 입력으로 사용합니다.
+> - grid of vector 값을 입력으로 넣어서 a1 값을 생성합니다.
+> - 이 a1(attention) (L x 1)의 요소로 grid of vector (L x D)에 각 depth(1 x D)에 곱하여 scaling 합니다.
+> - L개의 scaling 된 벡터를 더하여 z<sub>1</sub>(1 x D) 를 만들고 이를 입력으로 사용합니다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-025-RNN_Example_Image_Captioning_Attention_03.png)
 
-> 4. 위에서 만든 z<sub>1</sub>과 단어를 함께 입력으로 넣어 다음 attention(a<sub>2</sub>) 값과 단어의 분포도 값을 얻습니다.
-> 5. 위에서 얻은 attention(a<sub>2</sub>)값을 다시 grid of vector 에 곱하여 다음 z 값을 얻고 이를 반복합니다.
+> - 위에서 만든 z<sub>1</sub>과 단어를 함께 입력으로 넣어 다음 attention(a<sub>2</sub>) 값과 단어의 분포도 값을 얻습니다.
+> - 위에서 얻은 attention(a<sub>2</sub>)값을 다시 grid of vector 에 곱하여 다음 z 값을 얻고 이를 반복합니다.
 
 ![](/assets/img/dev/mldl/cs231n/lecture10/cs231n-10-026-RNN_Example_Image_Captioning_Attention_04.png)
 
