@@ -3,7 +3,7 @@ layout: post
 title: < CS231n 정리 > 7. Training Neural Networks 2
 category: dev
 permalink: /MLDL/:year/:month/:day/:title/
-tags: dev mldl CS231n Stanford
+tags: dev mldl cs231n Stanford
 comments: true
 ---
 

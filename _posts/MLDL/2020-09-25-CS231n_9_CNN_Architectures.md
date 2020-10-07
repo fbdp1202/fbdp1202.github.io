@@ -3,7 +3,7 @@ layout: post
 title: < CS231n 정리 > 9. CNN Architectures
 category: dev
 permalink: /MLDL/:year/:month/:day/:title/
-tags: dev mldl CS231n Stanford
+tags: dev mldl cs231n Stanford
 comments: true
 ---
 
