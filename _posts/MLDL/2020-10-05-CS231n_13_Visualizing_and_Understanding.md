@@ -23,7 +23,7 @@ comments: true
 
 - [CS231n 2020 Lecture 13. 강의 노트](http://cs231n.stanford.edu/slides/2020/lecture_13.pdf)
 
-- [CS231 2017 Lecture 12. 한국어 자막](https://github.com/visionNoob/CS231N_17_KOR_SUB/blob/master/kor/Lecture%2012%20%20%20Visualizing%20and%20Understanding.ko.srt)
+- [CS231 2017 Lecture 12. 한국어 자막](https://github.com/visionNoob/CS231N_17_KOR_SUB/blob/master/kor)
 
 - [https://leechamin.tistory.com/117?category=830805](https://leechamin.tistory.com/117?category=830805)
 
