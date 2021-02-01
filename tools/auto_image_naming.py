@@ -12,20 +12,21 @@ for line in lines:
 
 root_path = "../"
 post_path = root_path + "_posts/"
-post_category = "MLDL/"
+post_category = "PaperToMath/"
 
 folder_path = post_path + post_category
 
 img_path = "../assets/img/"
-img_category = "dev/mldl/"
+img_category = "dev/papertomath/"
 
-title = "cs231n"
-chapter_num = "13"
+title = "summary"
+chapter_num = ""
 
 img_title = title + "/"
-img_chapter = "lecture" + chapter_num + "/"
+# img_subtitle = "lecture" + chapter_num + "/" +
+img_subtitle = "SA_EEND/"
 
-move_folder = img_path + img_category + img_title + img_chapter
+move_folder = img_path + img_category + img_title + img_subtitle
 
 
 count = 1
@@ -41,5 +42,3 @@ print(len(original_name), count - 1)
 
 # def ChangeName(path, cName):
 #     i = 1
-
-
